@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.camp_us.mybatis.mappers.LectureMapper">
+
+    <insert id="insertFinalPlan" parameterType="com.camp_us.dto.LectureVO">
+        INSERT INTO LECTURE_PLANMAKER
+        (
+            COURSE_ID,
+            FILE_NAME,
+            FILE_PATH,
+            REG_DATE
+        )
+        VALUES
+        (
+            #{courseId},
+            #{fileName},
+            #{filePath},
+            #{regDate}
+        )
+    </insert>
+    
+<select id="selectFirstOne" resultType="com.camp_us.dto.LectureVO">
+        SELECT *
+        FROM (
+            SELECT
+                COURSE_ID   AS courseId,
+                FILE_NAME   AS fileName,
+                FILE_PATH   AS filePath,
+                REG_DATE    AS regDate
+            FROM LECTURE_PLANMAKER   <!-- 요청하신 테이블명 -->
+            ORDER BY REG_DATE ASC
+        )
+        WHERE ROWNUM = 1
+    </select>
+
+</mapper>
