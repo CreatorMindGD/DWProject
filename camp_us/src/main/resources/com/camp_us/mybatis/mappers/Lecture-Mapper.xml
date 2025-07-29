@@ -6,34 +6,15 @@
 <mapper namespace="com.camp_us.mybatis.mappers.LectureMapper">
 
     <insert id="insertFinalPlan" parameterType="com.camp_us.dto.LectureVO">
-        INSERT INTO LECTURE_PLANMAKER
-        (
-            COURSE_ID,
-            FILE_NAME,
-            FILE_PATH,
-            REG_DATE
-        )
-        VALUES
-        (
-            #{courseId},
-            #{fileName},
-            #{filePath},
-            #{regDate}
-        )
+        UPDATE LEC_CLASS
+        SET LEC_ID=#{lec_id}, LEC_FILENAME=#{lec_filename}, LEC_FILEPATH=#{lec_filepath}, REGDATE=#{regdate}
+        WHERE LEC_ID = #{lec_id}
     </insert>
     
 <select id="selectFirstOne" resultType="com.camp_us.dto.LectureVO">
         SELECT *
-        FROM (
-            SELECT
-                COURSE_ID   AS courseId,
-                FILE_NAME   AS fileName,
-                FILE_PATH   AS filePath,
-                REG_DATE    AS regDate
-            FROM LECTURE_PLANMAKER   <!-- 요청하신 테이블명 -->
-            ORDER BY REG_DATE ASC
-        )
-        WHERE ROWNUM = 1
-    </select>
+        FROM LEC_CLASS
+        WHERE LEC_ID = #{lec_id}
+</select>
 
 </mapper>

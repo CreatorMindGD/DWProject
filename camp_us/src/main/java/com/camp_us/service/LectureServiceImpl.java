@@ -58,9 +58,9 @@ public class LectureServiceImpl implements LectureService {
         }
 
         LectureVO vo = new LectureVO();
-        vo.setCourseId(courseId);
-        vo.setFileName(originalName);
-        vo.setFilePath(dest.getAbsolutePath());
+        vo.setLec_id("test123");
+        vo.setLec_filename(originalName);
+        vo.setLec_filepath(dest.getAbsolutePath());
         vo.setRegDate(new Date());
 
         lectureDAO.insertFinalPlan(vo);

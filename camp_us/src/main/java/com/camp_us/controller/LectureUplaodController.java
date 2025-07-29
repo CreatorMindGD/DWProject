@@ -45,7 +45,7 @@ public class LectureUplaodController {
 
     @GetMapping("/finalupload")
     public String finalUploadForm(Model model) {
-        model.addAttribute("courseId", "testcourse3");
+        model.addAttribute("lec_id", "testcourse3");
         return "lecture/final";
     }
 
