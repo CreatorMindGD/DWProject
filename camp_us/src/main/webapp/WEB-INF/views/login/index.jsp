@@ -102,7 +102,7 @@
     <div class="login-section">
         <h2>LOGIN</h2>
         <p>회원님의 아이디와 비밀번호를 정확히 입력해주세요.</p>
-        <form method="post" action="login/post" class="form-box">
+        <form method="post" action="${ctx}/login/index/post" class="form-box">
         	<input name="retUrl" value="${retUrl}" type="hidden"/>
             <input type="text" name="id" placeholder="ID" required />
             <input type="password" name="pwd" placeholder="PASSWORD" required />
@@ -114,5 +114,11 @@
         </form>
     </div>
 </div>
+<c:if test="${not empty sessionScope.loginFailMsg}">
+    <script>
+        alert("${sessionScope.loginFailMsg}");
+    </script>
+    <c:remove var="loginFailMsg" scope="session" />
+</c:if>
 </body>
 </html>
