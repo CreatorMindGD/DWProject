@@ -2,6 +2,7 @@ package com.camp_us.dto;
 
 
 
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
@@ -14,8 +15,8 @@ public class MemberVO {
     private String mem_email;
     private String mem_phone;
     private String mem_add;
-    private String mem_lastlogin_date;
-    private String mem_lastlogin_time;
+    private Date mem_lastlogin_date;
+    private Time mem_lastlogin_time;
     private String mem_sus;
     private String mem_auth;
     private int enabled;
@@ -61,16 +62,16 @@ public class MemberVO {
 	public void setMem_add(String mem_add) {
 		this.mem_add = mem_add;
 	}
-	public String getMem_lastlogin_date() {
+	public Date getMem_lastlogin_date() {
 		return mem_lastlogin_date;
 	}
-	public void setMem_lastlogin_date(String mem_lastlogin_date) {
+	public void setMem_lastlogin_date(Date mem_lastlogin_date) {
 		this.mem_lastlogin_date = mem_lastlogin_date;
 	}
-	public String getMem_lastlogin_time() {
+	public Time getMem_lastlogin_time() {
 		return mem_lastlogin_time;
 	}
-	public void setMem_lastlogin_time(String mem_lastlogin_time) {
+	public void setMem_lastlogin_time(Time mem_lastlogin_time) {
 		this.mem_lastlogin_time = mem_lastlogin_time;
 	}
 	public String getMem_sus() {

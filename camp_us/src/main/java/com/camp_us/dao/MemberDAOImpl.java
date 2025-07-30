@@ -27,4 +27,10 @@ public class MemberDAOImpl implements MemberDAO{
 	public String selectAuthoritiesById(String mem_id) {
 		return session.selectOne("Member-Mapper.selectAuthoritiesById",mem_id);
 	}
+
+
+	@Override
+	public void insertLastLogin(MemberVO vo) throws Exception {
+		session.insert("Member-Mapper.updateLastLogin",vo);	
+	}
 }
