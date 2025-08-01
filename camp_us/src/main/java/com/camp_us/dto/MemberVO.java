@@ -19,7 +19,14 @@ public class MemberVO {
     private Time mem_lastlogin_time;
     private String mem_sus;
     private String mem_auth;
-    private int enabled;
+    private String picture;
+    public String getPicture() {
+		return picture;
+	}
+	public void setPicture(String picture) {
+		this.picture = picture;
+	}
+	private int enabled;
 	public int getEnabled() {
 		return enabled;
 	}

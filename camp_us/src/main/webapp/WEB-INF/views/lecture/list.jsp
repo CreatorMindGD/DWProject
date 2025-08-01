@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 <!doctype html>
 <html lang="ko">
@@ -59,7 +60,9 @@
   <div class="container">
     <h1>강의계획서가 없습니다.</h1>
     <p class="desc">강의계획서가 현재 등록되어있지 않습니다.</p>
+    <sec:authorize access="hasRole('ROLE_02')">
     <button type="button" class="primary" id="btnGoUpload">등록하기</button>
+    </sec:authorize>
   </div>
 
 <script>

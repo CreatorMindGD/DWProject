@@ -46,6 +46,37 @@ public class MemberServiceImpl implements MemberService {
 		}
 		
 	}
+	
+	@Override
+	public List<MemberVO> list() throws SQLException {
+		List<MemberVO> memberList = memberDAO.selectMemberList();
+		
+		return memberList;
+	}
+
+	@Override
+	public void regist(MemberVO member) throws SQLException {
+
+	}
+
+	@Override
+	public void modify(MemberVO member) throws SQLException {
+		memberDAO.updateMember(member);
+	}
+
+	@Override
+	public void remove(String id) throws SQLException {
+		memberDAO.deleteMember(id);
+	}
+
+	@Override
+	public void modifyAuthority(String id, List<String> authorities) throws SQLException {
+		memberDAO.deleteAllAuthorityById(id);
+		if(authorities.size()>0)for(String authority:authorities) {
+			memberDAO.insertAuthorities(id,Integer.parseInt(authority));
+		}
+	}
+
 
 }
 

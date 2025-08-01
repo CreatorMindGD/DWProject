@@ -31,7 +31,8 @@ public class LectureUplaodController {
 
 	
     @GetMapping("/list")
-    public String lectureList() {
+    public String lectureList(@RequestParam("lec_id") String lec_id, Model model) {
+    	model.addAttribute("lec_id", lec_id);
         return "lecture/list";
     }
  

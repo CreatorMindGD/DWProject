@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Project-Mapper">
+
+  <!-- 프로젝트 목록 검색 -->
+  <select id="selectProjectList" resultType="project">
+    SELECT *
+    FROM PROJECT
+    ORDER BY PROJECT_ID DESC
+  </select>
+  <!-- 특정 학생의 진행 중 프로젝트 수 조회 -->
+  <select id="selectOngoingProjectCountByStuId" parameterType="string" resultType="int">
+    SELECT COUNT(*)
+    FROM PROJECT P
+    JOIN STU_PROJ SP ON P.PROJECT_ID = SP.PROJECT_ID
+    WHERE SP.STU_ID = #{stu_id}
+      AND P.PROJECT_PROC = '진행중'
+  </select>
+  <select id="selectProjectListByStuId" parameterType="string" resultType="project">
+  SELECT P.*
+  FROM PROJECT P
+  JOIN TEAM T ON P.PROJECT_ID = T.PROJECT_ID
+  JOIN TEAM_MEMBER TM ON T.TEAM_ID = TM.TEAM_ID
+  WHERE TM.STU_ID = #{stu_id}
+  ORDER BY P.PROJECT_ID DESC
+</select>
+  <!-- 프로젝트 상세 조회 -->
+  <select id="selectProjectById" parameterType="string" resultType="project">
+    SELECT *
+    FROM PROJECT
+    WHERE PROJECT_ID = #{project_id}
+  </select>
+
+  <!-- 프로젝트 등록 -->
+  <insert id="insertProject" parameterType="project">
+    INSERT INTO PROJECT (
+      PROJECT_ID, PROJECT_NAME, PROJECT_DESC, PROJECT_PROC,
+      SCHE_NAME, SCHE_START, SCHE_END, PJSUMIT_EVAL,
+      PROFES_ID, EDIT_REQ_STATUS, EDIT_ACCEPT_YN
+    ) VALUES (
+      #{project_id}, #{project_name}, #{project_desc}, #{project_proc},
+      #{sche_name}, #{sche_start}, #{sche_end}, #{pjsumit_eval},
+      #{profes_id}, #{edit_req_status}, #{edit_accept_yn}
+    )
+  </insert>
+
+  <!-- 프로젝트 수정 -->
+  <update id="updateProject" parameterType="project">
+    UPDATE PROJECT
+    SET
+      PROJECT_NAME = #{project_name},
+      PROJECT_DESC = #{project_desc},
+      PROJECT_PROC = #{project_proc},
+      SCHE_NAME = #{sche_name},
+      SCHE_START = #{sche_start},
+      SCHE_END = #{sche_end},
+      PJSUMIT_EVAL = #{pjsumit_eval},
+      PROFES_ID = #{profes_id},
+      EDIT_REQ_STATUS = #{edit_req_status},
+      EDIT_ACCEPT_YN = #{edit_accept_yn}
+    WHERE PROJECT_ID = #{project_id}
+  </update>
+
+  <!-- 프로젝트 삭제 -->
+  <delete id="deleteProject" parameterType="string">
+    DELETE FROM PROJECT
+    WHERE PROJECT_ID = #{project_id}
+  </delete>
+
+</mapper>

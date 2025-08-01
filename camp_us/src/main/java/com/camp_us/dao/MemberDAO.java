@@ -9,6 +9,17 @@ import com.camp_us.dto.LectureVO;
 import com.camp_us.dto.MemberVO;
 
 public interface MemberDAO {
+	
+	List<MemberVO> selectMemberList()throws SQLException;
+	
+	
+	MemberVO selectMemberById(String mem_id)throws SQLException;
+	void insertMember(MemberVO member)throws SQLException;
+	void updateMember(MemberVO member)throws SQLException;
+	void deleteMember(String mem_id)throws SQLException;	
+	
+	void insertAuthorities(String mem_id, int ano)throws SQLException;
+	void deleteAllAuthorityById(String mem_id)throws SQLException;
 	MemberVO getMemberById(String mem_id) throws SQLException;
 
 	String selectAuthoritiesById(String id);

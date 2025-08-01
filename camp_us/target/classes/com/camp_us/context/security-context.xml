@@ -34,7 +34,9 @@
         	/>
         </security:session-management>
 		<security:intercept-url pattern="/login/index" access="permitAll" />
-		<security:intercept-url pattern="/lecture/list" access="hasRole('ROLE_02')" />
+		<security:intercept-url pattern="/lecture/list" access="hasAnyRole('ROLE_02', 'ROLE_01')" />
+		<security:intercept-url pattern="/lecture/main" access="isAuthenticated()" />
+		<security:intercept-url pattern="/student" access="isAuthenticated()" />
 		<security:intercept-url pattern="/main/home" access="isAuthenticated()" />
 		<security:intercept-url pattern="/**" access="permitAll" />
 	</security:http>
@@ -49,7 +51,7 @@
 
 	<beans:bean id="loginSuccessHandler"
 		class="com.camp_us.security.LoginSuccessHandler" 
-		p:defaultTargetUrl="/main/home"
+		p:defaultTargetUrl="/student"
 		p:memberService-ref="memberService" />
 
 	<beans:bean id="loginFailureHandler"
