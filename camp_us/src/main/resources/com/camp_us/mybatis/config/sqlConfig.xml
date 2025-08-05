@@ -18,6 +18,10 @@
 			alias="unsubmithw" />
 		<typeAlias type="com.camp_us.dto.ProjectVO" alias="project" />
 		<typeAlias type="com.camp_us.dto.StuLecVO" alias="stuLec" />
+		<typeAlias type="com.camp_us.dto.LecVideoVO"
+			alias="LecVideoVO" />
+		<typeAlias type="com.camp_us.dto.AttendanceVO"
+			alias="AttendanceVO" />
 	</typeAliases>
 
 </configuration>

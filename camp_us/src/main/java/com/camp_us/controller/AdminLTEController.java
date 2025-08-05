@@ -27,7 +27,7 @@ public class AdminLTEController {
         MemberVO member = (MemberVO) session.getAttribute("loginUser");
         model.addAttribute("member", member);
 		String stu_id = member.getMem_id();
-		System.out.println(stu_id);// mimi 학생 id 하드코딩
+		System.out.println(stu_id);
         try {
             List<StuLecVO> lectureList = stuLecService.selectLectureListByStudentId(stu_id);
             model.addAttribute("lectureList", lectureList);

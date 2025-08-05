@@ -176,7 +176,7 @@
               </li>
               
               <li class="nav-item" data-url="">
-                <a href="" class="nav-link">
+                <a href="" class="nav-link" onclick="goLecvid(); return false;">
                   <i class="far nav-icon"></i>
                   <p>&nbsp;&nbsp;&nbsp;온라인 강의</p>
                 </a>
@@ -391,6 +391,16 @@ function goSyllabus() {
 	    return;
 	  }
 	const syllabusUrl = '<%=request.getContextPath()%>/lecture/list?lec_id=' + encodeURIComponent(selectedLecId);
+	location.hash = syllabusUrl;
+	document.getElementById("mainFrame").src = syllabusUrl;
+	}
+	
+function goLecvid() {
+	  if (!selectedLecId) {
+	    alert("전공을 먼저 선택하세요.");
+	    return;
+	  }
+	const syllabusUrl = '<%=request.getContextPath()%>/lecture/vidlist?lec_id=' + encodeURIComponent(selectedLecId);
 	location.hash = syllabusUrl;
 	document.getElementById("mainFrame").src = syllabusUrl;
 	}

@@ -4,74 +4,72 @@
 	xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:c="http://www.springframework.org/schema/c"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-	
-	<bean id="picturePath" 
-		  class="java.lang.String"
-		  c:value="${savePath.member.picture}" 		
-	/>
-	
-	<bean id="memberDAO"
-	      class="com.camp_us.dao.MemberDAOImpl"
-	      c:session-ref="sqlSession"
-	      />
+
+	<bean id="picturePath" class="java.lang.String"
+		c:value="${savePath.member.picture}" />
+
+	<bean id="memberDAO" class="com.camp_us.dao.MemberDAOImpl"
+		c:session-ref="sqlSession" />
 	<bean id="memberService"
-	      class="com.camp_us.service.MemberServiceImpl"
-	      c:memberDAO-ref="memberDAO"
-	      />
-	      
-	 <bean id="lectureDAO"
-	      class="com.camp_us.dao.LectureDAOImpl"
-	      c:session-ref="sqlSession"
-	 />
-	      
+		class="com.camp_us.service.MemberServiceImpl"
+		c:memberDAO-ref="memberDAO" />
+
+	<bean id="lectureDAO" class="com.camp_us.dao.LectureDAOImpl"
+		c:session-ref="sqlSession" />
+
 	<bean id="lectureService"
-      class="com.camp_us.service.LectureServiceImpl"
-      c:lectureDAO-ref="lectureDAO"
-      p:uploadPath="${upload.final.path}" />
-      
-     <bean id="menuDAO"
-		  class="com.camp_us.dao.MenuDAOImpl"
-		  c:session-ref="sqlSession"
-	/>
-		  
-	<bean id="lecClassDAO"
-		  class="com.camp_us.dao.LecClassDAOImpl"
-		  c:session-ref="sqlSession"
-	 />
-		  <bean id="unsubmitHomeworkDAO"
-		  class="com.camp_us.dao.UnsubmitHomeworkDAOImpl"
-		  c:session-ref="sqlSession"
-	      />
-	<bean id="projectDAO"
-		  class="com.camp_us.dao.ProjectDAOImpl"
-		  c:session-ref="sqlSession"
-		  />
-	<bean id="stuLecDAO"
-		  class="com.camp_us.dao.StuLecDAOImpl"
-		  c:session-ref="sqlSession"
-		  />
-		  
-		  <bean id="menuService"
-		  class="com.camp_us.service.MenuServiceImpl"
-		  c:menuDAO-ref="menuDAO"
-		  />
+		class="com.camp_us.service.LectureServiceImpl"
+		c:lectureDAO-ref="lectureDAO" p:uploadPath="${upload.final.path}" />
+
+	<bean id="menuDAO" class="com.camp_us.dao.MenuDAOImpl"
+		c:session-ref="sqlSession" />
+
+	<bean id="lecClassDAO" class="com.camp_us.dao.LecClassDAOImpl"
+		c:session-ref="sqlSession" />
+	<bean id="unsubmitHomeworkDAO"
+		class="com.camp_us.dao.UnsubmitHomeworkDAOImpl"
+		c:session-ref="sqlSession" />
+	<bean id="projectDAO" class="com.camp_us.dao.ProjectDAOImpl"
+		c:session-ref="sqlSession" />
+	<bean id="stuLecDAO" class="com.camp_us.dao.StuLecDAOImpl"
+		c:session-ref="sqlSession" />
+
+	<bean id="menuService" class="com.camp_us.service.MenuServiceImpl"
+		c:menuDAO-ref="menuDAO" />
 	<bean id="lecClassService"
-		  class="com.camp_us.service.LecClassServiceImpl"
-		  c:lecClassDAO-ref="lecClassDAO"
-		  />
+		class="com.camp_us.service.LecClassServiceImpl"
+		c:lecClassDAO-ref="lecClassDAO" />
 	<bean id="unsubmitHomeworkService"
-		  class="com.camp_us.service.UnsubmitHomeworkServiceImpl"
-		  c:unsubmithomeworkDAO-ref="unsubmitHomeworkDAO"
-		  />
+		class="com.camp_us.service.UnsubmitHomeworkServiceImpl"
+		c:unsubmithomeworkDAO-ref="unsubmitHomeworkDAO" />
 	<bean id="projectService"
-		  class="com.camp_us.service.ProjectServiceImpl"
-		  c:projectDAO-ref="projectDAO"
-		  />
+		class="com.camp_us.service.ProjectServiceImpl"
+		c:projectDAO-ref="projectDAO" />
 	<bean id="stuLecService"
-		  class="com.camp_us.service.StuLecServiceImpl"
-		  c:stuLecDAO-ref="stuLecDAO"
-		  />
-	    
-	    
-	      
+		class="com.camp_us.service.StuLecServiceImpl"
+		c:stuLecDAO-ref="stuLecDAO" />
+
+	<bean id="lecVideoDAO" class="com.camp_us.dao.LecVideoDAOImpl"
+		c:sqlSession-ref="sqlSession" />
+
+	<bean id="lecVideoService"
+		class="com.camp_us.service.LecVideoServiceImpl"
+		c:videoDAO-ref="lecVideoDAO" />
+
+	<bean id="attendanceDAO" class="com.camp_us.dao.AttendanceDAOImpl"
+		c:sqlSession-ref="sqlSession" />
+
+	<bean id="lectureListDAO"
+		class="com.camp_us.dao.LectureListDAOImpl"
+		c:sqlSession-ref="sqlSession" />
+
+	<bean id="vidAttendanceService"
+		class="com.camp_us.service.VidAttendanceServiceImpl"
+		c:attendanceDAO-ref="attendanceDAO"
+		c:lectureListDAO-ref="lectureListDAO" />
+
+
+
+
+
 </beans>
