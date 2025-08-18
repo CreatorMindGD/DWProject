@@ -22,4 +22,9 @@ public class LectureDAOImpl implements LectureDAO {
         return session.selectOne("com.camp_us.mybatis.mappers.LectureMapper.selectFirstOne");
     }
 	
+    @Override
+    public String selectFilePathById(String lec_id) {
+        return session.selectOne("com.camp_us.mybatis.mappers.LectureMapper.selectFilePathById", lec_id);
+    }
+	
 }

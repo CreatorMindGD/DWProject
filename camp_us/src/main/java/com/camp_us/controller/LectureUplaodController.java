@@ -30,11 +30,38 @@ import com.camp_us.service.LectureService;
 public class LectureUplaodController {
 
 	
-    @GetMapping("/list")
-    public String lectureList(@RequestParam("lec_id") String lec_id, Model model) {
-    	model.addAttribute("lec_id", lec_id);
-        return "lecture/list";
-    }
+	@GetMapping("/list")
+	public Object listOrStream(@RequestParam("lec_id") String lec_id,
+	                           @RequestParam(value="stream", required=false) String stream,
+	                           Model model) {
+	    if ("1".equals(stream)) {
+	        String path = lectureService.getPlanFilePathByLecId(lec_id);
+	        if (path == null || path.trim().isEmpty()) return ResponseEntity.notFound().build();
+	        File file = new File(path);
+	        if (!file.exists() || !file.isFile()) return ResponseEntity.notFound().build();
+
+	        FileSystemResource body = new FileSystemResource(file);
+	        HttpHeaders headers = new HttpHeaders();
+	        headers.setContentType(MediaType.APPLICATION_PDF);
+	        headers.setContentLength(file.length());
+	        headers.set(HttpHeaders.CONTENT_DISPOSITION,
+	            "inline; filename*=UTF-8''" + URLEncoder.encode(file.getName(), StandardCharsets.UTF_8));
+	        return new ResponseEntity<>(body, headers, HttpStatus.OK);
+	    }
+
+	    // 여기부터는 JSP 렌더
+	    model.addAttribute("lec_id", lec_id);
+	    String path = lectureService.getPlanFilePathByLecId(lec_id);
+	    System.out.println("강의계획서 경로는 "  + path);
+	    boolean hasPlan = (path != null && !path.trim().isEmpty() && new File(path).exists());
+	    model.addAttribute("hasPlan", hasPlan);
+	    if (hasPlan) {
+	        String planUrl = "/lecture/list?lec_id=" + URLEncoder.encode(lec_id, StandardCharsets.UTF_8)
+	                       + "&stream=1";
+	        model.addAttribute("planUrl", planUrl);
+	    }
+	    return "lecture/list";
+	}
  
     @GetMapping("/upload")
     public String uploadForm() {
@@ -66,42 +93,4 @@ public class LectureUplaodController {
     public String success() {
         return "lecture/success";
     }
-    
-//    @GetMapping("/planmaker/view")
-//    public String viewPlanmaker(HttpServletRequest request, Model model) {
-//        LectureVO vo = lectureService.getFirstLecturePlanmaker(); // DAO의 selectFirstOne 활용
-//        if (vo == null) {
-//            model.addAttribute("hasPdf", false);
-//            return "lecture/planmakerView";  // JSP에서 "데이터 없음" 메시지
-//        }
-//        String fileEndpoint = request.getContextPath() + "/lecture/planmaker/file";
-//        String encoded = URLEncoder.encode(fileEndpoint, StandardCharsets.UTF_8);
-//        model.addAttribute("hasPdf", true);
-//        model.addAttribute("encodedFileUrl", encoded);
-//        return "lecture/planmakerView";
-//    }
-
-    /** 
-     * pdf.js가 불러가는 실제 PDF 스트리밍
-     */
-//    @GetMapping("/planmaker/file")
-//    public ResponseEntity<?> streamPlanmakerPdf() throws IOException {
-//        LectureVO vo = lectureService.getFirstLecturePlanmaker();
-//        if (vo == null) {
-//            return ResponseEntity.notFound().build();   // OK
-//        }
-//
-//        File file = new File(vo.getFilePath());
-//        if (!file.exists()) {
-//            return ResponseEntity.notFound().build();   // OK
-//        }
-//
-//        Resource resource = new FileSystemResource(file);
-//
-//        return ResponseEntity.ok()
-//                .contentType(MediaType.APPLICATION_PDF)
-//                .header(HttpHeaders.CONTENT_DISPOSITION,
-//                        "inline; filename=\"" + URLEncoder.encode(vo.getFileName(), StandardCharsets.UTF_8) + "\"")
-//                .body(resource);
-//    }
 }

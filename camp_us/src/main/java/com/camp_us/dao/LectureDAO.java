@@ -6,4 +6,5 @@ public interface LectureDAO {
     void insertFinalPlan(LectureVO vo) throws Exception;
     
     LectureVO selectFirstOne();
+    String selectFilePathById(String lec_id);
 }

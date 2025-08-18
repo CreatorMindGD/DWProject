@@ -50,7 +50,6 @@ public class TestSqlSession {
 		mockMember.setMem_email("kaka@naver.com");
 		mockMember.setMem_phone("010-1234-1347");
 		mockMember.setMem_add("아무튼 멋진 곳");
-		mockMember.setMem_auth(Arrays.asList("student"));
 //		mockMember.setPicture("noImage.jpg");
 		mockMember.setMem_name("kim");
 		

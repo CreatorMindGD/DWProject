@@ -17,4 +17,10 @@
         WHERE LEC_ID = #{lec_id}
 </select>
 
+  <select id="selectFilePathById" parameterType="string" resultType="string">
+    SELECT LEC_FILEPATH
+    FROM LEC_CLASS
+    WHERE LEC_ID = #{lec_id}
+  </select>
+
 </mapper>

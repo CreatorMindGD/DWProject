@@ -169,7 +169,7 @@
                 </a>
               </li>
               <li class="nav-item" data-url="">
-                <a href="" class="nav-link">
+                <a href="" class="nav-link" onclick="goOnlineLec(); return false;">
                   <i class="far fas nav-icon"></i>
                   <p>&nbsp;&nbsp;&nbsp;실시간 강의</p>
                 </a>
@@ -403,6 +403,16 @@ function goLecvid() {
 	const syllabusUrl = '<%=request.getContextPath()%>/lecture/vidlist?lec_id=' + encodeURIComponent(selectedLecId);
 	location.hash = syllabusUrl;
 	document.getElementById("mainFrame").src = syllabusUrl;
+	}
+	
+function goOnlineLec() {
+	  if (!selectedLecId) {
+	    alert("전공을 먼저 선택하세요.");
+	    return;
+	  }
+	const Online = 'https:/192.168.0.13:3000/?roomid=' + encodeURIComponent(selectedLecId);
+	window.open(Online, 'test', "width=1200,height=800");
+	
 	}
 </script>
 </body>

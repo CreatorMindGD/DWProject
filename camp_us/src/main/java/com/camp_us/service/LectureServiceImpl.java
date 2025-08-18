@@ -69,5 +69,10 @@ public class LectureServiceImpl implements LectureService {
     public LectureVO getFirstLecturePlanmaker() {
         return lectureDAO.selectFirstOne();
     }
+    
+    public String getPlanFilePathByLecId(String lec_id) {
+        return lectureDAO.selectFilePathById(lec_id);
+    }
+
 }
 

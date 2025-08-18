@@ -8,7 +8,7 @@
 
 <html>
 <head>
-<title>${week}차온라인강의</title>
+<title>${week} 온라인강의</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/bootstrap/plugins/fontawesome-free/css/all.min.css">
 <link rel="stylesheet"
@@ -103,6 +103,15 @@
 	cursor: pointer;
 }
 
+.btn-remove {
+	background-color: #cc6666;
+	color: white;
+	padding: 6px 12px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
 .btn-register {
 	float: right;
 	margin-top: 20px;
@@ -129,7 +138,7 @@
 <body>
 
 	<div class="container mt-4">
-		<h2 class="mb-4">${week}온라인강의</h2>
+		<h2 class="mb-4">${week} 온라인강의</h2>
 
 		<!-- ✅ 강의 없을 경우 -->
 		<c:if test="${empty videoList}">
@@ -146,7 +155,7 @@
 					<div class="video-title">
 						<a
 							href="${pageContext.request.contextPath}/lecture/detail?lec_id=${lecId}&lecvid_id=${video.lecvidId}"
-							onclick="window.open(this.href, '_blank', 'width=800,height=600'); return false;">
+							onclick="window.open(this.href, '_blank', 'width=800,height=500'); return false;">
 							${video.lecvidName} </a>
 						<sec:authorize access="hasRole('ROLE_01')">
 							<span class="status ${video.status}">${video.status}</span>
@@ -174,6 +183,12 @@
 							<input type="hidden" name="lec_id" value="${lecId}" /> <input
 								type="hidden" name="lecvid_id" value="${video.lecvidId}" />
 							<button class="btn-modify" type="submit">수정하기</button>
+						</form>
+						<form method="get"
+							action="${pageContext.request.contextPath}/lecture/remove">
+							<input type="hidden" name="lec_id" value="${lecId}" /> <input
+								type="hidden" name="lecvid_id" value="${video.lecvidId}" />
+							<button class="btn-remove" type="submit">삭제하기</button>
 						</form>
 					</sec:authorize>
 				</div>
